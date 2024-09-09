@@ -39,14 +39,14 @@ git clone https://github.com/yourusername/travel-booking.git
 cd travel-booking
 ```
 
-2. Create a virtual environment:
+### Step 2: Create a Virtual Environment
 A virtual environment helps isolate the dependencies for this project. Create one with the following command:
 
 ```bash
 python -m venv venv
 ```
 
-3. Activate the virtual environment:
+### Step 3: Activate the Virtual Environment
 Activate the virtual environment depending on your operating system:
 
 - On Windows:
@@ -58,27 +58,27 @@ Activate the virtual environment depending on your operating system:
   source venv/bin/activate
   ```
 
-4. Install Dependencies :
+### Step 4: Install Dependencies
 Once your virtual environment is activated, install the necessary packages by running:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-5. Set up the database:
+### Step 5: Set Up the Database
 Set up the database by running the following migration command:
 ```bash
 python manage.py migrate
 ```
 
-6. Create a superuser:
+### Step 6: Create a Superuser
 To access the Django admin panel, create a superuser account:
 ```bash
 python manage.py createsuperuser
 ```
 Follow the prompts to set up a username, email, and password.
 
-7. Run the development server:
+### Step 7: Run the Development Server
 Start the Django development server:
 
 ```bash
@@ -88,40 +88,43 @@ You can now access the application in your browser at `http://localhost:8000`.
 
 ## Troubleshooting
 
-- If you encounter any package installation issues, make sure your pip is up to date:
-```bash
-pip install --upgrade pip
-```
+Here are some common issues you may encounter, along with their solutions:
 
+- **Issue**: Packages not installing properly.
 
-- If you get a "No module named 'django'" error, ensure you've activated your virtual environment and installed the requirements.
+ - **Solution**: Ensure that your version of pip is up to date:
+    ```bash
+    pip install --upgrade pip
+    ```
 
-- For database-related issues, try:
-```bash
-python manage.py makemigrations
-python manage.py migrate
-```
+- **Issue**: Error: "No module named 'django'"
 
+ - **Solution**: Make sure you have activated the virtual environment and installed the project dependencies.
 
-- If you're having trouble with static files, run:
-```bash
-python manage.py collectstatic
-```
+- **Issue**: Database issues such as missing tables.
 
+ - **Solution**: Run the following commands to fix database migrations:
+    ```bash
+    python manage.py makemigrations
+    python manage.py migrate
+    ```
 
-- For any other issues, please check the Django documentation or open an issue in this repository.
+- **Issue**: Static files not loading properly.
+
+ - **Solution**: Collect static files by running:
+    ```bash
+    python manage.py collectstatic
+    ```
+
+If you're still having trouble, consult the official [Django documentation](https://docs.djangoproject.com/en/5.1/) or open an issue in this repository.
 
 ## Running Tests
 
-To run the tests, use the following command:
+To ensure everything is functioning correctly, run the test suite with:
 ```bash
 python manage.py test
 ```
-
-
-## Contributing
-
-Please read CONTRIBUTING.md for details on our code of conduct and the process for submitting pull requests.
+This will execute the automated tests to verify the integrity of the system.
 
 ## License
 
