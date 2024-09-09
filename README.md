@@ -100,6 +100,7 @@ Start the Django development server:
 python manage.py runserver
 ```
 You can now access the application in your browser at `http://localhost:8000`.
+
 To access the admin dashboard, navigate to `http://localhost:8000/admin` and log in using the superuser credentials you created in Step 6.
 
 ## Troubleshooting
