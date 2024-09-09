@@ -1,0 +1,42 @@
+{% extends 'bookings/base.html' %}
+
+{% block content %}
+<h2>My Bookings</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Booking ID</th>
+            <th>Travel Type</th>
+            <th>Source</th>
+            <th>Destination</th>
+            <th>Date/Time</th>
+            <th>Number of Seats</th>
+            <th>Total Price</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for booking in bookings %}
+        <tr>
+            <td>{{ booking.booking_id }}</td>
+            <td>{{ booking.travel_option.get_type_display }}</td>
+            <td>{{ booking.travel_option.source }}</td>
+            <td>{{ booking.travel_option.destination }}</td>
+            <td>{{ booking.travel_option.date_time }}</td>
+            <td>{{ booking.number_of_seats }}</td>
+            <td>${{ booking.total_price }}</td>
+            <td>{{ booking.get_status_display }}</td>
+            <td>
+                {% if booking.status == 'CONFIRMED' %}
+                <form method="post" action="{% url 'cancel_booking' booking.booking_id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-sm btn-danger">Cancel</button>
+                </form>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

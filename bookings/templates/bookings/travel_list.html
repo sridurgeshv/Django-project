@@ -1,0 +1,42 @@
+<!-- bookings/templates/bookings/travel_list.html -->
+{% extends 'bookings/base.html' %}
+
+{% block content %}
+<h2>Available Travel Options</h2>
+<form method="get">
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Filter</button>
+</form>
+<table class="table mt-4">
+    <thead>
+        <tr>
+            <th>Type</th>
+            <th>Source</th>
+            <th>Destination</th>
+            <th>Date/Time</th>
+            <th>Price</th>
+            <th>Available Seats</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for option in travel_options %}
+        <tr>
+            <td>{{ option.get_type_display }}</td>
+            <td>{{ option.source }}</td>
+            <td>{{ option.destination }}</td>
+            <td>{{ option.date_time }}</td>
+            <td>${{ option.price }}</td>
+            <td>{{ option.available_seats }}</td>
+            <td>
+                <a href="{% url 'booking_form' option.travel_id %}" class="btn btn-sm btn-primary">Book</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="7">No travel options found matching your criteria.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
