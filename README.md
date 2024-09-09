@@ -66,7 +66,23 @@ pip install -r requirements.txt
 ```
 
 ### Step 5: Set Up the Database
-First, open the `travel_booking/settings.py` file and locate the `DATABASES` configuration. Replace the `PASSWORD` field with your actual MySQL server password:
+
+Setting up MySQL:
+
+First, make sure you have MySQL installed on your system. If not, download and install it from the official MySQL website.
+
+Once installed, open your MySQL command line client and run these commands:
+
+```sql
+CREATE DATABASE travel_booking_db;
+CREATE USER 'travel_user'@'localhost' IDENTIFIED BY 'your_password';
+GRANT ALL PRIVILEGES ON travel_booking_db.* TO 'travel_user'@'localhost';
+FLUSH PRIVILEGES;
+```
+
+Replace 'your_password' with a strong password of your choice.
+
+Next, open the `travel_booking/settings.py` file and locate the `DATABASES` configuration. Replace the `PASSWORD` field with your actual MySQL server password:
 
 ```python
 DATABASES = {
