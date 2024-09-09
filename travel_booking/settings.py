@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-&56$(t6ynt)2mu-z)$f(l)s6ejv&(=4sfhgd@(qog6+l%ixnwi
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']  # For local development
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.elasticbeanstalk.com']  # For local development
 
 # Application definition
 
@@ -79,12 +79,11 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'travel_booking_db',
         'USER': 'travel_user',
-        'PASSWORD': 'YOUR_MYSQL_PASSWORD_HERE',
+        'PASSWORD': 'YOUR_MYSQL_PASSWORD_HERE',  # Replace with your actual MySQL password
         'HOST': 'localhost',
         'PORT': '3306',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
