@@ -66,7 +66,22 @@ pip install -r requirements.txt
 ```
 
 ### Step 5: Set Up the Database
-Set up the database by running the following migration command:
+First, open the `travel_booking/settings.py` file and locate the `DATABASES` configuration. Replace the `PASSWORD` field with your actual MySQL server password:
+
+```python
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'travel_booking_db',
+        'USER': 'travel_user',
+        'PASSWORD': 'YOUR_MYSQL_PASSWORD_HERE',  # Replace with your actual MySQL password
+        'HOST': 'localhost',
+        'PORT': '3306',
+    }
+}
+```
+
+After updating the password, set up the database by running the following migration command:
 ```bash
 python manage.py migrate
 ```
@@ -125,7 +140,3 @@ To ensure everything is functioning correctly, run the test suite with:
 python manage.py test
 ```
 This will execute the automated tests to verify the integrity of the system.
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE.md file for details.
