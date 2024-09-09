@@ -4,9 +4,25 @@
 {% block content %}
 <h2>Available Travel Options</h2>
 <form method="get">
-    {{ form.as_p }}
+    {% for field in form %}
+        <div class="form-group">
+            {{ field.label_tag }}
+            {{ field }}
+        </div>
+    {% endfor %}
     <button type="submit" class="btn btn-primary">Filter</button>
 </form>
+
+<!-- Debug Information 
+<div style="background-color: #f0f0f0; padding: 10px; margin: 10px 0;">
+    <h3>Debug Info:</h3>
+    <p>Form is valid: {{ form.is_valid }}</p>
+    <p>Form errors: {{ form.errors }}</p>
+    <p>Query parameters: {{ request.GET }}</p>
+    <p>Number of travel options: {{ travel_options.count }}</p>
+    <p>SQL Query: {{ travel_options.query }}</p>
+</div> -->
+
 <table class="table mt-4">
     <thead>
         <tr>

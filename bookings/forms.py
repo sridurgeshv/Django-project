@@ -14,7 +14,14 @@ class TravelFilterForm(forms.Form):
     type = forms.ChoiceField(choices=[('', 'All')] + list(TravelOption.TRAVEL_TYPES), required=False)
     source = forms.CharField(max_length=100, required=False)
     destination = forms.CharField(max_length=100, required=False)
-    date = forms.DateField(required=False, widget=forms.DateInput(attrs={'type': 'date'}))
+    date = forms.DateField(
+        required=False,
+        widget=forms.DateInput(attrs={
+            'type': 'date',
+            'class': 'form-control',
+            'style': 'width: 100%; padding: 0.375rem 0.75rem; font-size: 1rem; line-height: 1.5; color: #495057; background-color: #fff; background-clip: padding-box; border: 1px solid #ced4da; border-radius: 0.25rem; transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;'
+        })
+    )
 
 class BookingForm(forms.ModelForm):
     class Meta:

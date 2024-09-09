@@ -5,6 +5,9 @@ from .models import TravelOption, Booking
 from .forms import UserRegistrationForm, TravelFilterForm, BookingForm
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
+from django.db.models import Q
+from django.contrib.auth import logout
+from datetime import datetime, timedelta
 
 def home(request):
     return render(request, 'bookings/home.html')
@@ -38,18 +41,31 @@ def user_login(request):
 def travel_list(request):
     form = TravelFilterForm(request.GET)
     travel_options = TravelOption.objects.all()
-    
-    if form.is_valid():
-        if form.cleaned_data['type']:
-            travel_options = travel_options.filter(type=form.cleaned_data['type'])
-        if form.cleaned_data['source']:
-            travel_options = travel_options.filter(source__icontains=form.cleaned_data['source'])
-        if form.cleaned_data['destination']:
-            travel_options = travel_options.filter(destination__icontains=form.cleaned_data['destination'])
-        if form.cleaned_data['date']:
-            travel_options = travel_options.filter(date_time__date=form.cleaned_data['date'])
 
-    return render(request, 'bookings/travel_list.html', {'travel_options': travel_options, 'form': form})
+    if form.is_valid():
+        travel_type = form.cleaned_data.get('type')
+        source = form.cleaned_data.get('source')
+        destination = form.cleaned_data.get('destination')
+        date = form.cleaned_data.get('date')
+
+        # print(f"Debug: type={travel_type}, source={source}, destination={destination}, date={date}")
+
+        if travel_type:
+            travel_options = travel_options.filter(type=travel_type)
+        if source:
+            travel_options = travel_options.filter(source__icontains=source)
+        if destination:
+            travel_options = travel_options.filter(destination__icontains=destination)
+        if date:
+            date_start = datetime.combine(date, datetime.min.time())
+            date_end = datetime.combine(date, datetime.max.time())
+            travel_options = travel_options.filter(date_time__range=(date_start, date_end))
+
+    context = {
+        'form': form,
+        'travel_options': travel_options
+    }
+    return render(request, 'bookings/travel_list.html', context)
 
 @login_required
 def booking_form(request, travel_id):
@@ -92,3 +108,8 @@ def cancel_booking(request, booking_id):
         
         messages.success(request, 'Booking cancelled successfully!')
     return redirect('booking_list')
+
+@login_required
+def logout_view(request):
+    logout(request)
+    return redirect('home')
