@@ -7,7 +7,8 @@ This is a Django-based travel booking system that allows users to filter and boo
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/travel-booking.git cd travel-booking
+git clone https://github.com/yourusername/travel-booking.git 
+cd travel-booking
 ```
 
 
@@ -93,25 +94,3 @@ Please read CONTRIBUTING.md for details on our code of conduct and the process f
 ## License
 
 This project is licensed under the MIT License - see the LICENSE.md file for details.
-
-
-Let's begin with setting up the project:
-```npm
-# Install Django
-pip install django
-
-# Create a new Django project
-django-admin startproject travel_booking
-
-# Navigate to the project directory
-cd travel_booking
-
-# Create a new Django app
-python manage.py startapp bookings
-
-# Install MySQL client (if you're using MySQL)
-pip install mysqlclient
-
-# Create a requirements.txt file
-pip freeze > requirements.txt
-``` 
